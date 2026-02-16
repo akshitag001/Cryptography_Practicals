@@ -1,0 +1,12 @@
+FOR FIESTEL CIPHER - LAB
+- defien ull unsigned long long
+- define ul unsigned long 
+- define pp((ull)1<<32)-1
+int main()
+{
+ull,p,c
+ul,l0,r0,l1,r1,k
+printf("enter plaintext")
+scanf()
+printf()
+scanf()
