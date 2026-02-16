@@ -1,0 +1,28 @@
+#include <stdio.h>
+int gcd(int a, int b){
+    while(b != 0){
+        int temp = b;
+        b = a%b;
+        a = temp;
+    }
+    return a;
+}
+
+int main() {
+    int count = 0;
+    int n;// Write C code here
+    printf("Enter the number: ");
+    scanf("%d",&n);
+    int i;
+    for(i=1;i<=n;i++){
+       
+       
+        int result = gcd(n,i);
+        
+        if(result == 1){
+            count += 1;
+        }
+    }printf("%d",count);
+
+    return 0;
+}
