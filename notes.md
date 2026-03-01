@@ -10,3 +10,4 @@ printf("enter plaintext")
 scanf()
 printf()
 scanf()
+
