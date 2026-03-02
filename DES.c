@@ -111,13 +111,7 @@ void xor(int *a, int *b, int n) {
         a[i] ^= b[i];
 }
 
-void left_shift(int *key, int shifts) {
-    while(shifts--) {
-        int temp = key[0];
-        for(int i=0;i<27;i++) key[i]=key[i+1];
-        key[27]=temp;
-    }
-}
+
 
 void feistel(int *R, int *K, int *out) {
     int exp[48], s_out[32];
@@ -132,6 +126,7 @@ void feistel(int *R, int *K, int *out) {
     }
     permute(s_out, out, P, 32);
 }
+
 void hex_to_bits(char *hex, int *bits, int size) {
     for(int i = 0; i < size/4; i++) {
         int val;
@@ -163,8 +158,7 @@ void generate_keys(int *key, int round_keys[16][48]) {
     memcpy(D, perm+28, 28*sizeof(int));
 
     for(int i=0;i<16;i++) {
-        left_shift(C, SHIFTS[i]);
-        left_shift(D, SHIFTS[i]);
+
         memcpy(CD, C, 28*sizeof(int));
         memcpy(CD+28, D, 28*sizeof(int));
         permute(CD, round_keys[i], PC2, 48);
@@ -223,3 +217,6 @@ int main() {
     return 0;
 
 }
+
+Enter 16-hex-digit plaintext: 0123456789ABCDEF
+Enter 16-hex-digit key: 133457799BBCDFF
