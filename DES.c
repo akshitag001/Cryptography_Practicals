@@ -3,6 +3,7 @@
 
 /* ================= PERMUTATION TABLES ================= */
 
+#Initial permutation , it reorders the bits of the 64 bit PT  
 int IP[64] = {
 58,50,42,34,26,18,10,2,
 60,52,44,36,28,20,12,4,
@@ -14,6 +15,7 @@ int IP[64] = {
 63,55,47,39,31,23,15,7
 };
 
+#Final permutation , it is exact inverse of IP , it applied at the end to make output readable
 int FP[64] = {
 40,8,48,16,56,24,64,32,
 39,7,47,15,55,23,63,31,
@@ -24,6 +26,8 @@ int FP[64] = {
 34,2,42,10,50,18,58,26,
 33,1,41,9,49,17,57,25
 };
+
+#Expansion Table , it expands the 32 bit R into 48 cause key is 48 and it have to xor with R
 
 int E[48] = {
 32,1,2,3,4,5,
@@ -36,6 +40,7 @@ int E[48] = {
 28,29,30,31,32,1
 };
 
+#Permutations , it scrambles the output after S boxes , it improve diffusion
 int P[32] = {
 16,7,20,21,29,12,28,17,
 1,15,23,26,5,18,31,10,
@@ -44,7 +49,7 @@ int P[32] = {
 };
 
 /* ================= S-BOXES ================= */
-
+# S box the heart of DES, 8 sboxes 4 rows 16 columns , input is 6 bit output 4 bit
 int S[8][4][16] = {
 {
 {14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7},
@@ -97,6 +102,7 @@ int S[8][4][16] = {
 };
 
 /* ================= HELPER FUNCTIONS ================= */
+
 
 uint64_t permute(uint64_t in, int *table, int size) {
     uint64_t out = 0;
