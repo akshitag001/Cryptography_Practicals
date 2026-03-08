@@ -24,7 +24,7 @@ int E[48] = {
 24,25,26,27,28,29,28,29,30,31,32,1
 };
 
-#Rearrange output of S box 
+//Rearrange output of S box 
 int P[32] = {
 16,7,20,21,29,12,28,17,
 1,15,23,26,5,18,31,10,
@@ -32,7 +32,7 @@ int P[32] = {
 19,13,30,6,22,11,4,25
 };
 
-#takes 64 bit key convert inot 56 by droping 8 parity bit
+//takes 64 bit key convert inot 56 by droping 8 parity bit
 int PC1[56] = {
 57,49,41,33,25,17,9,1,58,50,42,34,26,18,
 10,2,59,51,43,35,27,19,11,3,60,52,44,36,
@@ -40,7 +40,7 @@ int PC1[56] = {
 14,6,61,53,45,37,29,21,13,5
 };
 
-# takes 56 bits and use only 48 
+//takes 56 bits and use only 48 
 int PC2[48] = {
 14,17,11,24,1,5,3,28,15,6,21,10,
 23,19,12,4,26,8,16,7,27,20,13,2,
@@ -48,14 +48,14 @@ int PC2[48] = {
 44,49,39,56,34,53,46,42,50,36,29,32
 };
 
-#Specifies how many bits to rotate each round
+//Specifies how many bits to rotate each round
 int SHIFTS[16] = {
 1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1
 };
 
 /* ================= S-BOXES ================= */
 
-#S-boxes Each:Input: 6 bits Output: 4 bits
+//S-boxes Each:Input: 6 bits Output: 4 bits
  
 int S[8][4][16] = {
 {{14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7},
@@ -100,7 +100,7 @@ int S[8][4][16] = {
 };
 
 /* ================= HELPER FUNCTIONS ================= */
-# it used for IP , FP , E , P  ,PC1, PC2 
+//it used for IP , FP , E , P  ,PC1, PC2 
 void permute(int *in, int *out, int *table, int n) {
     for(int i=0;i<n;i++)
       out[i] = in[table[i]-1];
@@ -127,26 +127,29 @@ void feistel(int *R, int *K, int *out) {
     permute(s_out, out, P, 32);
 }
 
-void hex_to_bits(char *hex, int *bits, int size) {
+
+void hex_to_bits(char *hex,int *bits, int size) {
     for(int i = 0; i < size/4; i++) {
         int val;
         if(hex[i] >= '0' && hex[i] <= '9') val = hex[i] - '0';
         else val = hex[i] - 'A' + 10;
-
-        for(int j = 0; j < 4; j++)
-            bits[i*4 + j] = (val >> (3 - j)) & 1;
+        
+        for(int j = 0 ; j < 4 ; j++)
+            bits[i*4 + j ] = (val >> (3-j)) & 1;
     }
 }
 
-void bits_to_hex(int *bits, char *hex, int size) {
+
+
+void bits_to_hex(int *bits,char *hex, int size) {
     for(int i = 0; i < size/4; i++) {
         int val = 0;
         for(int j = 0; j < 4; j++)
-            val = (val << 1) | bits[i*4 + j];
-
+            val = (val << 1) | bits[i*4 +j];
         hex[i] = (val < 10) ? (val + '0') : (val - 10 + 'A');
     }
     hex[size/4] = '\0';
+    
 }
 
 /* ================= DES CORE ================= */
@@ -218,7 +221,7 @@ int main() {
 
 }
 
-Enter 16-hex-digit plaintext: 0123456789ABCDEF
-Enter 16-hex-digit key: 133457799BBCDFF
- 1010101010111100101010101010111100101010101010111100101010101010
- 1100101100111100101010010110101010100110100101100101010101010101
+//Enter 16-hex-digit plaintext: 0123456789ABCDEF
+//Enter 16-hex-digit key: 133457799BBCDFF
+// 1010101010111100101010101010111100101010101010111100101010101010
+// 1100101100111100101010010110101010100110100101100101010101010101
