@@ -153,6 +153,15 @@ void bits_to_hex(int *bits,char *hex, int size) {
 }
 
 /* ================= DES CORE ================= */
+void left_shift(int *arr, int shifts) {
+    while(shifts--) {
+        int first = arr[0];
+        for(int i = 0; i < 27; i++)
+            arr[i] = arr[i+1];
+        arr[27] = first;
+    }
+}
+
 
 void generate_keys(int *key, int round_keys[16][48]) {
     int perm[56], C[28], D[28], CD[56];
@@ -161,7 +170,9 @@ void generate_keys(int *key, int round_keys[16][48]) {
     memcpy(D, perm+28, 28*sizeof(int));
 
     for(int i=0;i<16;i++) {
-
+        
+        left_shift(C, SHIFTS[i]);
+        left_shift(D, SHIFTS[i]);
         memcpy(CD, C, 28*sizeof(int));
         memcpy(CD+28, D, 28*sizeof(int));
         permute(CD, round_keys[i], PC2, 48);
