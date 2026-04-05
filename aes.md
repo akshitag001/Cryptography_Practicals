@@ -1,2 +1,2 @@
 
-![AES diagram](images/aes.png)
+![AES diagram](images/algorithm1.png)
